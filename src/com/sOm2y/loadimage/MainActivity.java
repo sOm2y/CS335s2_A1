@@ -11,29 +11,50 @@ import java.util.concurrent.Executors;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class MainActivity extends Activity {
 	private ExecutorService executorService = Executors.newFixedThreadPool(1);
-//	String imageUrl = "http://redsox.tcs.auckland.ac.nz/CSS/CSService.svc/home_image";
-//	Bitmap bmImage;
-//	ImageView imView;
-//	Button button;
-
+	private Button peopleBt;
+	private Button courseBt;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		 loadImage("http://redsox.tcs.auckland.ac.nz/CSS/CSService.svc/home_image",
 		 R.id.imageView1);
-//		imView = (ImageView) findViewById(R.id.imageView1);
-//		imView.setImageBitmap(returnBitMap(imageUrl));
+		 
+		peopleBt=(Button)this.findViewById(R.id.button2);
+		peopleBt.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent it=new Intent();
+				it.setClass(MainActivity.this, peopleActivity.class);
+				startActivity(it);
+			}
+		});
+		courseBt=(Button)this.findViewById(R.id.button1);
+		courseBt.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent it=new Intent();
+				it.setClass(MainActivity.this, coursesActivity.class);
+				
+				startActivity(it);
+			}
+		});
 		
 	}
 
@@ -50,28 +71,6 @@ public class MainActivity extends Activity {
 		super.onDestroy();
 	}
 
-//	public Bitmap returnBitMap(String url) {
-//
-//		URL myFileUrl = null;
-//		Bitmap bitmap = null;
-//		try {
-//			myFileUrl = new URL(url);
-//		} catch (MalformedURLException e) {
-//			e.printStackTrace();
-//		}
-//		try {
-//			HttpURLConnection conn = (HttpURLConnection) myFileUrl
-//					.openConnection();
-//			conn.setDoInput(true);
-//			conn.connect();
-//			InputStream is = conn.getInputStream();
-//			bitmap = BitmapFactory.decodeStream(is);
-//			is.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		return bitmap;
-//	}
 	private void loadImage(final String url, final int id) {
 		final Handler handler = new Handler();
 		executorService.submit(new Runnable() {
