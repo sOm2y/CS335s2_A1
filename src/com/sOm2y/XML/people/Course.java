@@ -42,8 +42,7 @@ public class Course {
 
 	@Override
 	public String toString() {
-		return "Course [codeField=" + codeField + ", semesterField="
-				+ semesterField + ", titleField=" + titleField + "]";
+		return ""+codeField +"\n"+semesterField+"\n"+titleField+"\n";
 	}
 
 }

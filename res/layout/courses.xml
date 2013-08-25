@@ -2,12 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@drawable/uoa01"
+    android:orientation="vertical"
+    android:textAlignment="center" >
 
-    <TextView
-        android:id="@+id/courses1"
+    <ScrollView
+        
+        android:id="@+id/sv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         />
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        >
+
+        <TextView
+            android:id="@+id/courses1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#E6E6E6"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </ScrollView>
 
 </LinearLayout>

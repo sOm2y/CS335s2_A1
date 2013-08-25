@@ -119,7 +119,7 @@
         android:layout_marginLeft="11dp"
         android:layout_toRightOf="@+id/button4"
         android:background="#A3CC29"
-        android:text="Staff"
+        android:text="Staffs"
         android:textColor="#FFFFFF"
         android:textStyle="bold" />
 
@@ -132,7 +132,7 @@
         android:layout_below="@+id/textView1"
         android:layout_marginTop="11dp"
         android:background="#7A0000"
-        android:text="Course"
+        android:text="Courses"
         android:textColor="#FFFFFF"
         android:textStyle="bold" />
 
