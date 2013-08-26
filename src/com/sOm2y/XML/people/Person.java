@@ -25,7 +25,7 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "Person [uPIField=" + uPIField + "]";
+		return uPIField + "\n";
 	}
 
 }
