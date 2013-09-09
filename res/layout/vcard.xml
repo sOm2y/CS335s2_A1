@@ -22,19 +22,15 @@
             android:layout_width="wrap_content"  
             android:layout_height="wrap_content"  
             android:textColor="#cbcaca"  
-            android:textSize="14dp" />  
+            android:textSize="14dp"
+            android:autoLink="all" />  
         <TextView  
             android:id="@+id/time"  
             android:layout_width="wrap_content"  
             android:layout_height="wrap_content"  
             android:textColor="#cbcaca"  
-            android:textSize="12dp" />  
+            android:textSize="12dp"
+            android:autoLink="all" />  
     </LinearLayout>  
-    <CheckBox  
-        android:id="@+id/checked"  
-        android:layout_height="fill_parent"  
-        android:layout_width="wrap_content"  
-        android:layout_alignParentRight="true"  
-        android:checked="false"  
-        android:focusable="false" />  
+  
 </RelativeLayout>  

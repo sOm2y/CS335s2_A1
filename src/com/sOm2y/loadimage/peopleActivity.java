@@ -2,6 +2,9 @@ package com.sOm2y.loadimage;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -45,7 +48,8 @@ import android.widget.TextView;
 public class peopleActivity extends Activity {
 
 	private ListView mListView;
-	private ArrayAdapter<VCard> adapter;
+	
+	private List<String> stuffList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,41 +59,81 @@ public class peopleActivity extends Activity {
 			setContentView(R.layout.people);
 
 			mListView = (ListView) findViewById(R.id.listview);
-
+		
 			String path = "http://redsox.tcs.auckland.ac.nz/CSS/CSService.svc/people";
 
-			List<String> stuffList = new RetreiveFeedTaskOfStuff().execute(path)
-					.get();
-			
-				// 下面是数据映射关系,mFrom和mTo按顺序一一对应
-				String[] mFrom = new String[] { "img", "title1", "title2",
-						"time" };
-				int[] mTo = new int[] { R.id.img, R.id.title1, R.id.title2,
-						R.id.time };
-				// 获取数据,这里随便加了10条数据,实际开发中可能需要从数据库或网络读取
-				List<Map<String, Object>> mList = new ArrayList<Map<String, Object>>();
-				Map<String, Object> mMap = null;
-				for (int i = 0; i <=2; i++) {
-					VCard vcardList = new RetreiveFeedTaskOfVCard().execute(
-							stuffList.get(i)).get();
-					byte[] btImage = vcardList.getPhotos().get(0).getData();
-					System.out.println(btImage.toString());
-					Bitmap decodedByte = BitmapFactory.decodeByteArray(btImage, 0,
-					btImage.length);
-					//Drawable d = new BitmapDrawable(getResources(),decodedByte);
+			stuffList = new RetreiveFeedTaskOfStuff().execute(path).get();
+			System.out.println(stuffList.size());
+
+			String[] mFrom = new String[] { "img", "title1", "title2", "time" };
+			int[] mTo = new int[] { R.id.img, R.id.title1, R.id.title2,
+					R.id.time };
+
+			List<Map<String, Object>> mList = new ArrayList<Map<String, Object>>();
+			Map<String, Object> mMap = null;
+
+			for (int i = 0; i < stuffList.size(); i++) {
+
+				VCard vcardList = new RetreiveFeedTaskOfVCard().execute(
+						stuffList.get(i)).get();
+
+				System.out.println(i);
+				
+					// Drawable d = new
+					// BitmapDrawable(getResources(),decodedByte);
 					mMap = new HashMap<String, Object>();
+
 					mMap.put("img", R.drawable.tower);
 					mMap.put("title1", vcardList.getFormattedName().getValue());
 					mMap.put("title2", vcardList.getEmails().get(0).getValue());
-					mMap.put("time", vcardList.getTelephoneNumbers().get(0).getText());
-				
+					mMap.put("time", vcardList.getTelephoneNumbers().get(0)
+							.getText());
+
 					mList.add(mMap);
+				
+
+			}
+			// 创建适配器
+			SimpleAdapter mAdapter = new SimpleAdapter(this, mList,
+					R.layout.vcard, mFrom, mTo) {
+				@Override
+				public View getView(final int position, View convertView,
+						ViewGroup parent) {
+					View view = super.getView(position, convertView, parent);
+
+					@SuppressWarnings("unchecked")
+					final HashMap<String, Object> map = (HashMap<String, Object>) this
+							.getItem(position);
+					ImageView imageView = (ImageView) view
+							.findViewById(R.id.img);
+					TextView tv1 = (TextView) view.findViewById(R.id.title1);
+					TextView tv2 = (TextView) view.findViewById(R.id.title2);
+					TextView tv3 = (TextView) view.findViewById(R.id.time);
+					try {
+						if (map.get("img") == null) {
+							throw new IOException();
+						}
+						VCard vcardList = new RetreiveFeedTaskOfVCard()
+								.execute(stuffList.get(position)).get();
+						byte[] btImage = vcardList.getPhotos().get(0).getData();
+
+						Bitmap decodedByte = BitmapFactory.decodeByteArray(
+								btImage, 0, btImage.length);
+						tv1.setText(vcardList.getFormattedName().getValue());
+						tv2.setText(vcardList.getEmails().get(0).getValue());
+						tv3.setText(vcardList.getTelephoneNumbers().get(0)
+								.getText());
+						imageView.setImageBitmap(decodedByte);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return view;
 				}
-				// 创建适配器
-				SimpleAdapter mAdapter = new SimpleAdapter(this, mList,
-						R.layout.vcard, mFrom, mTo);
-				mListView.setAdapter(mAdapter);
-			
+			};
+
+			mListView.setAdapter(mAdapter);
+
 			// String path =
 			// "http://redsox.tcs.auckland.ac.nz/CSS/CSService.svc/people";
 			//
@@ -113,6 +157,9 @@ public class peopleActivity extends Activity {
 
 			// stuff1.setMovementMethod(LinkMovementMethod.getInstance());
 			// stuff1.setMovementMethod(new ScrollingMovementMethod());
+
+		} catch (IndexOutOfBoundsException e) {
+			// TODO Auto-generated catch block
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -165,22 +212,21 @@ class RetreiveFeedTaskOfStuff extends AsyncTask<String, Void, List<String>> {
 class RetreiveFeedTaskOfVCard extends AsyncTask<String, Void, VCard> {
 
 	private Exception exception;
-	private VCard vc ;
+	private VCard vc;
 
 	@Override
 	protected VCard doInBackground(String... params) {
 		// TODO Auto-generated method stub
 
 		try {
-			
-				InputStream is = http_people.getVCard(params[0]);
-				InputStreamReader isReader = new InputStreamReader(is);
 
-				if (isReader.ready()) {
-					vc = Ezvcard.parse(isReader).first();
+			InputStream is = http_people.getVCard(params[0]);
+			InputStreamReader isReader = new InputStreamReader(is);
 
-				}
-			
+			if (isReader.ready()) {
+				vc = Ezvcard.parse(isReader).first();
+
+			}
 
 		} catch (Exception e) {
 			this.exception = e;
