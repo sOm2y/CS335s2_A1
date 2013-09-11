@@ -11,6 +11,7 @@ import java.util.concurrent.Executors;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,37 +26,90 @@ public class MainActivity extends Activity {
 	private ExecutorService executorService = Executors.newFixedThreadPool(1);
 	private Button peopleBt;
 	private Button courseBt;
+	private Button seminarBt;
+	private Button newsBt;
+	private Button eventsBt;
+	Button btnStartProgress;
+	ProgressDialog progressBar;
+	private int progressBarStatus = 0;
+	private Handler progressBarHandler = new Handler();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		 loadImage("http://redsox.tcs.auckland.ac.nz/CSS/CSService.svc/home_image",
-		 R.id.imageView1);
-		 
-		peopleBt=(Button)this.findViewById(R.id.button2);
+		loadImage(
+				"http://redsox.tcs.auckland.ac.nz/CSS/CSService.svc/home_image",
+				R.id.imageView1);
+
+		peopleBt = (Button) this.findViewById(R.id.button2);
 		peopleBt.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent it=new Intent();
+				progressBar = new ProgressDialog(v.getContext());
+				progressBar.setCancelable(true);
+				progressBar.setMessage("File downloading ...");
+				progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+				progressBar.show();
+
+				Intent it = new Intent();
 				it.setClass(MainActivity.this, peopleActivity.class);
+
 				startActivity(it);
 			}
 		});
-		courseBt=(Button)this.findViewById(R.id.button1);
+		courseBt = (Button) this.findViewById(R.id.button1);
 		courseBt.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent it=new Intent();
+				Intent it = new Intent();
 				it.setClass(MainActivity.this, coursesActivity.class);
-				
+
 				startActivity(it);
 			}
 		});
-		
+
+		seminarBt = (Button) this.findViewById(R.id.button5);
+		seminarBt.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent it = new Intent();
+				it.setClass(MainActivity.this, seminarFeedRSS.class);
+
+				startActivity(it);
+			}
+		});
+		newsBt = (Button) this.findViewById(R.id.button3);
+		newsBt.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent it = new Intent();
+				it.setClass(MainActivity.this, newsFeedRSS.class);
+
+				startActivity(it);
+			}
+		});
+		eventsBt = (Button) this.findViewById(R.id.button4);
+		eventsBt.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent it = new Intent();
+				it.setClass(MainActivity.this, eventsFeedRSS.class);
+
+				startActivity(it);
+			}
+		});
 	}
 
 	@Override

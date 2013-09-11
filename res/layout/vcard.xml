@@ -16,21 +16,22 @@
             android:layout_width="wrap_content"  
             android:layout_height="wrap_content"  
             android:textColor="#cbcaca"  
-            android:textSize="20dp" />  
+            android:textSize="20dp" 
+             android:autoLink="all"/>  
         <TextView  
             android:id="@+id/title2"  
             android:layout_width="wrap_content"  
             android:layout_height="wrap_content"  
             android:textColor="#cbcaca"  
             android:textSize="14dp"
-            android:autoLink="all" />  
+            android:autoLink="email" />  
         <TextView  
             android:id="@+id/time"  
             android:layout_width="wrap_content"  
             android:layout_height="wrap_content"  
             android:textColor="#cbcaca"  
             android:textSize="12dp"
-            android:autoLink="all" />  
+            android:autoLink="phone" />  
     </LinearLayout>  
   
 </RelativeLayout>  

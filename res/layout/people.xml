@@ -3,12 +3,14 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    
     >
 
     <ListView
         android:id="@+id/listview"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:background="#FFFFD1" >
     </ListView>
 
 </LinearLayout>

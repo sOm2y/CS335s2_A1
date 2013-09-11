@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.sOm2y.XML.people.Course;
-import com.sOm2y.http.http_courses;
+
 import com.sOm2y.parserXML.parserXML_courses;
 
 import android.app.Activity;

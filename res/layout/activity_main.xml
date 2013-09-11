@@ -61,31 +61,7 @@
         android:textColor="#001A33"
         android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_alignRight="@+id/textView1"
-        android:src="@drawable/button_rss" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/imageView3"
-        android:layout_alignLeft="@+id/imageView3"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/t" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/imageView5"
-        android:layout_alignLeft="@+id/imageView5"
-        android:layout_marginBottom="13dp"
-        android:src="@drawable/fb" />
+  
 
     <Button
         android:id="@+id/button4"
@@ -94,31 +70,55 @@
         android:layout_alignLeft="@+id/button1"
         android:layout_alignRight="@+id/button3"
         android:layout_below="@+id/button1"
-        android:layout_marginTop="12dp"
         android:background="#AD9533"
         android:text="Events"
         android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button4"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_below="@+id/button4"
+        android:layout_marginTop="19dp"
+        android:background="#C0C0C0"
+        android:text="Copyright © sOm2y.com                                                                        version 1.01a "
+        android:textSize="10dp" 
+        android:autoLink="all"/>
 
     <Button
         android:id="@+id/button3"
         android:layout_width="100dp"
         android:layout_height="70dp"
         android:layout_above="@+id/button4"
-        android:layout_alignTop="@+id/button1"
         android:layout_toRightOf="@+id/imageView2"
         android:background="#5CADFF"
         android:text="News"
         android:textColor="#FFFFFF" />
 
     <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button3"
+        android:layout_alignLeft="@+id/button3"
+        android:layout_alignRight="@+id/button2"
+        android:layout_alignTop="@+id/button1"
+        android:background="#944D94"
+        android:text="seminars"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
         android:layout_alignBottom="@+id/button4"
-        android:layout_alignTop="@+id/button3"
-        android:layout_marginLeft="11dp"
+        android:layout_alignRight="@+id/footer"
+        android:layout_below="@+id/button5"
         android:layout_toRightOf="@+id/button4"
-        android:background="#A3CC29"
+        android:background="#7BB147"
         android:text="Staffs"
         android:textColor="#FFFFFF"
         android:textStyle="bold" />
@@ -130,22 +130,11 @@
         android:layout_height="110dp"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="12dp"
+        android:layout_toLeftOf="@+id/button3"
         android:background="#7A0000"
         android:text="Courses"
         android:textColor="#FFFFFF"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/footer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button4"
-        android:layout_alignRight="@+id/imageView3"
-        android:layout_below="@+id/button4"
-        android:layout_marginTop="19dp"
-        android:background="#C0C0C0"
-        android:text="Copyright © The University of Auckland     "
-        android:textSize="10dp" />
-  
 </RelativeLayout>

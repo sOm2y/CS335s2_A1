@@ -24,11 +24,14 @@
         </activity>
         <activity android:name="com.sOm2y.loadimage.peopleActivity" />
         <activity android:name="com.sOm2y.loadimage.coursesActivity" />
+        <activity android:name="com.sOm2y.loadimage.seminarFeedRSS" />
+        <activity android:name="com.sOm2y.loadimage.newsFeedRSS" />
+        <activity android:name="com.sOm2y.loadimage.eventsFeedRSS" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 
 </manifest>
